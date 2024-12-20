@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#007BFF',
     },
     container_SECONDARY: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: '#007BFF',
     },
     container_TERTIARY: {},
