@@ -1,14 +1,22 @@
 import React from 'react';
 import Svg, { Mask, Rect, G, Path } from 'react-native-svg';
 
-const DeliveryIcon = ({ color, ...props }) => (
+import { IIconProps } from './../Icon.controller';
+
+const DEFAULT_SIZE = 24;
+
+const DeliveryIcon: React.FC<IIconProps> = ({
+  color,
+  height,
+  width = DEFAULT_SIZE,
+  ...props
+}) => (
   <Svg
-    width={24}
-    height={24}
     fill="none"
+    width={width}
     viewBox="0 0 24 24"
+    height={height || width}
     xmlns="http://www.w3.org/2000/svg"
-    {...props}
   >
     <Mask
       id="mask0_2004_1529"

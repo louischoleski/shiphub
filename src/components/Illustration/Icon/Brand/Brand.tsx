@@ -1,7 +1,9 @@
 import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
-const BrandIcon = () => (
+import { IIconProps } from './../Icon.controller';
+
+const BrandIcon: React.FC<IIconProps> = () => (
     <Svg
         width={95}
         height={32}

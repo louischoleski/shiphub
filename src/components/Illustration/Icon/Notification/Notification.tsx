@@ -1,7 +1,9 @@
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
-const NotificationIcon = ({ color, ...props }) => (
+import { IIconProps } from './../Icon.controller';
+
+const NotificationIcon: React.FC<IIconProps> = ({ color, ...props }) => (
   <Svg
     width={25}
     height={24}

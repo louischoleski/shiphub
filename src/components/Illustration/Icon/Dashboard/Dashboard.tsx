@@ -1,7 +1,9 @@
 import React from 'react';
 import Svg, { Mask, Rect, G, Path } from 'react-native-svg';
 
-const DashboardIcon = ({ color, ...props }) => (
+import { IIconProps } from './../Icon.controller';
+
+const DashboardIcon: React.FC<IIconProps> = ({ color, ...props }) => (
   <Svg
     width={25}
     height={24}

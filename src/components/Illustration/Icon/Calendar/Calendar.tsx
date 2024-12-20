@@ -1,12 +1,21 @@
 import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
-const CalendarIcon = ({ color, ...props }) => (
+import { IIconProps } from './../Icon.controller';
+
+const DEFAULT_SIZE = 24;
+
+const CalendarIcon: React.FC<IIconProps> = ({
+  color,
+  height,
+  width = DEFAULT_SIZE,
+  ...props
+}) => (
   <Svg
-    width={24}
-    height={24}
     fill="none"
+    width={width}
     viewBox="0 0 24 24"
+    height={height || width}
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
