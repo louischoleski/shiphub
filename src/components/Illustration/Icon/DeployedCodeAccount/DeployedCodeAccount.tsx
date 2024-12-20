@@ -16,7 +16,7 @@ const DeployedCodeAccountIcon: React.FC<IIconProps> = ({
     width={width}
     viewBox="0 0 24 24"
     height={height || width}
-    xmlns="http://www.w3.org/2000/svg"
+    {...props}
   >
     <Mask
       id="mask0_137_19987"

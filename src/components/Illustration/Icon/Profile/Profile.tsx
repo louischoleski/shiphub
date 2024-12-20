@@ -9,7 +9,6 @@ const ProfileIcon: React.FC<IIconProps> = ({ color, ...props }) => (
     height={24}
     fill="none"
     viewBox="0 0 25 24"
-    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <Path
