@@ -4,7 +4,7 @@ import { FlatList, View, Text, TouchableOpacity } from 'react-native';
 import styles from './../../ReportScreen.styled';
 import { sortByKey, getDemoTimestamp } from '../../../../utils';
 import { DEFAULT_FILTERS, DEFAULT_REPORT_SECTIONS, SupportedFilters } from './../../ReportScreen.controller';
-import { ScreenView, DeliveryCard, Typography, Grid, Input, Button, NavPill, Illustration } from '../../../../components';
+import { DeliveryCard, Typography, Grid, Input, Button, NavPill, Illustration } from '../../../../components';
 
 const demoData = [
     // TODAY

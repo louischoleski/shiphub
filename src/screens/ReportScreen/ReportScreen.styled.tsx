@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     searchFilters: {
+        marginTop: -18,
         paddingHorizontal: 16,
     },
     dateSelectionContainer: {
