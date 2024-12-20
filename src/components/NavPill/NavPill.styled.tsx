@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         ...tw`shadow-sm`,
         color: "#606060",
         borderRadius: 25,
-        marginBottom: 10,
         paddingHorizontal: 15,
         backgroundColor: 'white',
     },
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
     },
     listStyle: {
         margin: 0,
-        paddingVertical: 3,
+        paddingVertical: 2,
         textAlign: "center",
     },
 });
