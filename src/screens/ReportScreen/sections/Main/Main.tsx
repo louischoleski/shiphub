@@ -178,11 +178,11 @@ const ReportMainSection = ({ onSectionPress }) => {
 
     const options = React.useMemo(() => {
         const sortedData = sortByKey(demoData, 'timestamp', 'desc');
-    
+
         if (activeFilter === SupportedFilters.ALL) {
             return sortedData;
         }
-    
+
         return sortedData.filter(({ status }) => status === activeFilter);
     }, [demoData, activeFilter]);
 
@@ -197,8 +197,8 @@ const ReportMainSection = ({ onSectionPress }) => {
     }
 
     const dateSelection = (
-        <TouchableOpacity 
-            onPress={onSelectDatePressed} 
+        <TouchableOpacity
+            onPress={onSelectDatePressed}
             style={styles.dateWrapper}
         >
             <Text style={styles.dateTxt}>
@@ -206,6 +206,7 @@ const ReportMainSection = ({ onSectionPress }) => {
             </Text>
             <View style={styles.navIcon}>
                 <Illustration.Icon
+                    width={19}
                     name="calendar"
                     color="#007BFF"
                 />
@@ -249,11 +250,13 @@ const ReportMainSection = ({ onSectionPress }) => {
                     </View>
                 </Grid>
                 <Grid cols={1}>
-                    <NavPill 
-                        options={DEFAULT_FILTERS}
-                        currentItem={activeFilter}
-                        onChange={setActiveFilter}
-                    />
+                    <View style={styles.filters}>
+                        <NavPill
+                            options={DEFAULT_FILTERS}
+                            currentItem={activeFilter}
+                            onChange={setActiveFilter}
+                        />
+                    </View>
                 </Grid>
             </View>
 
@@ -264,7 +267,7 @@ const ReportMainSection = ({ onSectionPress }) => {
                     <DeliveryCard
                         key={item.id}
                         data={item}
-                        // isExpanded
+                    // isExpanded
                     />
                 )}
             />

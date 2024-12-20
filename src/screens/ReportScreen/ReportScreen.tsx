@@ -22,8 +22,20 @@ const ReportScreen = () => {
         }
     }
 
+    const onBackPress = () => {
+        setActiveSection(DEFAULT_REPORT_SECTIONS.MAIN);
+    }
+
+    const hideHeaderNav = React.useMemo(() => !Boolean(
+        activeSection === DEFAULT_REPORT_SECTIONS.MAIN
+    ), [activeSection]);
+
     return (
-        <ScreenView withHeader>
+        <ScreenView
+            withHeader
+            withNav={hideHeaderNav}
+            onBackPress={onBackPress}
+        >
             {activeSection === DEFAULT_REPORT_SECTIONS.MAIN && (
                 <Main onSectionPress={onSectionPress} />
             )}

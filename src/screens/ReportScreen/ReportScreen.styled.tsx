@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     },
     //
     info: {
-        paddingBottom: 5,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
@@ -35,19 +34,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     dateTxt:{
+        fontSize: 13,
         color: '#007BFF',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
     },
     navIcon: {
-        //backgroundColor: 'red',
-        width: 20,
-        height: 16,
-        marginLeft: 10,
+        marginLeft: 7,
         alignItems: 'flex-end',
         justifyContent: 'center',
-        // ...tw`flex-row justify-center`
     },
+    // Tab filter
+    filters: {
+        marginTop: 15,
+        marginBottom: 8,
+    }
 });
 
 export default styles;
