@@ -32,7 +32,14 @@ const styles = StyleSheet.create({
     label: {
         marginBottom: 8,
         color: '#6C757D',
-    }
+    },
+    disabledContainer: {
+        backgroundColor: '#f5f5f5',
+        borderColor: '#dcdcdc',
+    },
+    disabledInput: {
+        color: '#a9a9a9',
+    },
 })
 
 export default styles;
