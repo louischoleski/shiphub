@@ -1,12 +1,40 @@
 import React from 'react';
-import { View, Text, Platform, TouchableOpacity } from 'react-native';
+import { View, Text, Platform, TouchableOpacity, StyleProp, ViewStyle, TextStyle } from 'react-native';
 
 import { Utils } from './Utils';
 import Controls from './Controls';
 
-const accessibilityProps = { accessibilityRole: 'header' };
+export interface IHeaderControlsProps {
+	maxDate?: Date;
+	minDate?: Date;
+	months?: string[];
+	nextTitle: string;
+	currentYear: number;
+	currentMonth: number;
+	headingLevel?: string;
+	previousTitle: string;
+	onPressNext: () => void;
+	onPressYear: () => void;
+	onPressMonth: () => void;
+	onPressPrevious: () => void;
+	styles: StyleProp<ViewStyle>;
+	nextComponent?: React.ReactNode;
+	textStyle?: StyleProp<TextStyle>;
+	restrictMonthNavigation: boolean;
+	previousComponent?: React.ReactNode;
+	nextTitleStyle?: StyleProp<TextStyle>;
+	yearTitleStyle?: StyleProp<TextStyle>;
+	monthTitleStyle?: StyleProp<TextStyle>;
+	previousTitleStyle?: StyleProp<TextStyle>;
+	headerWrapperStyle?: StyleProp<ViewStyle>;
+	monthYearHeaderWrapperStyle?: StyleProp<ViewStyle>;
+}
 
-const HeaderControls = ({
+const accessibilityProps: { [key: string]: any; } = {
+	accessibilityRole: 'header'
+};
+
+const HeaderControls: React.FC<IHeaderControlsProps> = ({
 	styles,
 	months,
 	maxDate,
@@ -33,11 +61,14 @@ const HeaderControls = ({
 }) => {
 	const MONTHS = months || Utils.MONTHS; // English Month Array
 	const monthName = MONTHS[currentMonth];
-	const year = currentYear;
 
-	const disablePreviousMonth = restrictMonthNavigation && Utils.isSameMonthAndYear(minDate, currentMonth, currentYear);
+	const disablePreviousMonth = React.useMemo(() => (
+		restrictMonthNavigation && Utils.isSameMonthAndYear(minDate, currentMonth, currentYear)
+	), [minDate, currentMonth, currentYear, restrictMonthNavigation]);
 
-	const disableNextMonth = restrictMonthNavigation && Utils.isSameMonthAndYear(maxDate, currentMonth, currentYear);
+	const disableNextMonth = React.useMemo(() => (
+		restrictMonthNavigation && Utils.isSameMonthAndYear(maxDate, currentMonth, currentYear)
+	), [maxDate, currentMonth, currentYear, restrictMonthNavigation]);
 
 	if (Platform.OS === 'web') {
 		accessibilityProps['aria-level'] = headingLevel;
@@ -53,15 +84,15 @@ const HeaderControls = ({
 				styles={styles.previousContainer}
 				textStyles={[styles.navButtonText, textStyle, previousTitleStyle]}
 			/>
-			<View style={[styles.monthYearHeaderWrapper,monthYearHeaderWrapperStyle]}>
+			<View style={[styles.monthYearHeaderWrapper, monthYearHeaderWrapperStyle]}>
 				<TouchableOpacity onPress={onPressMonth}>
 					<Text style={[styles.monthHeaderMainText, textStyle, monthTitleStyle]} {...accessibilityProps}>
-						{ monthName }
+						{monthName}
 					</Text>
 				</TouchableOpacity>
 				<TouchableOpacity onPress={onPressYear}>
 					<Text style={[styles.yearHeaderMainText, textStyle, yearTitleStyle]}>
-						{ year }
+						{currentYear}
 					</Text>
 				</TouchableOpacity>
 			</View>

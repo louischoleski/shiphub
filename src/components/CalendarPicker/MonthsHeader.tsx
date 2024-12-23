@@ -1,14 +1,23 @@
 import React from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text, Platform, StyleProp, ViewStyle, TextStyle } from 'react-native';
 
-const MonthsHeader = ({
+export interface IMonthsHeaderProps {
+	title: string;
+	headingLevel?: number;
+	styles: StyleProp<ViewStyle>;
+	textStyle?: StyleProp<TextStyle>;
+}
+
+const accessibilityProps: { [key: string]: any; } = {
+	accessibilityRole: 'header'
+};
+
+const MonthsHeader: React.FC<IMonthsHeaderProps> = ({
 	title,
 	styles,
 	textStyle,
 	headingLevel,
 }) => {
-	const accessibilityProps = { accessibilityRole: 'header' };
-
 	if (Platform.OS === 'web') {
 		accessibilityProps['aria-level'] = headingLevel;
 	}

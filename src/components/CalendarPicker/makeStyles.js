@@ -1,14 +1,8 @@
-/**
- * Calendar Picker Component
- *
- * Copyright 2016 Yahoo Inc.
- * Licensed under the terms of the MIT license. See LICENSE file in the project root for terms.
- */
-const DEFAULT_SELECTED_BACKGROUND_COLOR = '#5ce600';
-const DEFAULT_SELECTED_TEXT_COLOR = '#000000';
-const DEFAULT_TODAY_BACKGROUND_COLOR = '#CCCCCC';
+const DEFAULT_SELECTED_TEXT_COLOR = '#FFFFFF';
+const DEFAULT_TODAY_BACKGROUND_COLOR = '#DFEEFF';
+const DEFAULT_SELECTED_BACKGROUND_COLOR = '#007BFF';
 
-function getBorderRadiusByShape(scaler, dayShape) {
+const getBorderRadiusByShape = (scaler, dayShape) => {
   if (dayShape === 'square') {
     return 0;
   } else {
@@ -16,16 +10,15 @@ function getBorderRadiusByShape(scaler, dayShape) {
   }
 }
 
-export function makeStyles(params) {
-  const {
-    containerWidth,
-    containerHeight,
-    scaleFactor,
-    selectedDayColor,
-    selectedDayTextColor,
-    todayBackgroundColor,
-    dayShape
-  } = params;
+export const makeStyles = ({
+  dayShape,
+  scaleFactor,
+  containerWidth,
+  containerHeight,
+  selectedDayColor,
+  selectedDayTextColor,
+  todayBackgroundColor,
+}) => {
   const scaler = Math.min(containerWidth, containerHeight) / scaleFactor;
   const SELECTED_BG_COLOR = selectedDayColor ? selectedDayColor : DEFAULT_SELECTED_BACKGROUND_COLOR;
   const SELECTED_TEXT_COLOR = selectedDayTextColor ? selectedDayTextColor : DEFAULT_SELECTED_TEXT_COLOR;
@@ -59,15 +52,12 @@ export function makeStyles(params) {
     },
 
     dayLabelsWrapper: {
+      alignSelf: 'center',
       flexDirection: 'row',
-      borderBottomWidth: 1,
-      borderTopWidth: 1,
       paddingTop: 10*scaler,
       paddingBottom: 10*scaler,
-      alignSelf: 'center',
       justifyContent: 'center',
       backgroundColor: 'rgba(0,0,0,0.0)',
-      borderColor: 'rgba(0,0,0,0.2)'
     },
 
     daysWrapper: {

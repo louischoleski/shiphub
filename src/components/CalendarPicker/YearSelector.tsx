@@ -1,83 +1,101 @@
-// Parent view for Year selector
+import React from 'react';
+import { StyleProp, TextStyle, View, ViewStyle } from 'react-native';
 
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import YearsGridView from './YearsGridView';
 import YearsHeader from './YearsHeader';
+import YearsGridView from './YearsGridView';
 
-export default class YearSelector extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      initialYear: props.currentYear,
-    };
-  }
+export interface IYearSelectorProps {
+  title: string;
+  minDate: Date;
+  maxDate: Date;
+  nextTitle: string;
+  initialDate: number;
+  currentYear: number;
+  currentMonth: number;
+  textStyle: TextStyle;
+  headingLevel: number;
+  previousTitle: string;
+  nextTitleStyle: TextStyle;
+  restrictNavigation: boolean;
+  styles: StyleProp<ViewStyle>;
+  previousTitleStyle: TextStyle;
+  nextComponent: React.ReactNode;
+  previousComponent: React.ReactNode;
+  onSelectYear: (year: number) => void;
+}
 
-  handleOnYearViewPrevious = () => {
-    this.setState({
-      initialYear: parseInt(Math.max(this.state.initialYear - 25, 0))
-    });
-  }
+const YearSelector: React.FC<IYearSelectorProps> = ({
+  title,
+  styles,
+  minDate,
+  maxDate,
+  textStyle,
+  nextTitle,
+  initialDate,
+  currentMonth,
+  headingLevel,
+  onSelectYear,
+  nextComponent,
+  previousTitle,
+  nextTitleStyle,
+  previousComponent,
+  restrictNavigation,
+  previousTitleStyle,
+  currentYear: propCurrentYear,
+}) => {
+  const [initialYear, setinitialYear ] = React.useState(0);
 
-  handleOnYearViewNext = () => {
-    this.setState({
-      initialYear: parseInt(this.state.initialYear + 25)
-    });
-  }
+  React.useEffect(() => {
+    setinitialYear(propCurrentYear);
+  }, [propCurrentYear]);
 
-  render() {
-    const {
-      styles,
-      textStyle,
-      title,
-      initialDate,
-      currentMonth,
-      currentYear,
-      minDate,
-      maxDate,
-      restrictNavigation,
-      previousComponent,
-      nextComponent,
-      previousTitle,
-      nextTitle,
-      previousTitleStyle,
-      nextTitleStyle,
-      headingLevel,
-      onSelectYear,
-    } = this.props;
-
-    return (
-      <View styles={styles.calendar}>
-        <YearsHeader
-          styles={styles}
-          textStyle={textStyle}
-          title={title}
-          headingLevel={headingLevel}
-          initialDate={initialDate}
-          minDate={minDate}
-          maxDate={maxDate}
-          restrictNavigation={restrictNavigation}
-          year={this.state.initialYear}
-          previousComponent={previousComponent}
-          nextComponent={nextComponent}
-          previousTitle={previousTitle}
-          nextTitle={nextTitle}
-          previousTitleStyle={previousTitleStyle}
-          nextTitleStyle={nextTitleStyle}
-          onYearViewPrevious={this.handleOnYearViewPrevious}
-          onYearViewNext={this.handleOnYearViewNext}
-        />
-        <YearsGridView
-          intialYear={this.state.initialYear}
-          currentMonth={currentMonth}
-          currentYear={currentYear}
-          styles={styles}
-          onSelectYear={onSelectYear}
-          minDate={minDate}
-          maxDate={maxDate}
-          textStyle={textStyle}
-        />
-      </View>
+  const handleOnYearViewPrevious = () => {
+    setinitialYear(
+      parseInt(
+        Math.max(initialYear - 25, 0)
+      )
     );
   }
+
+  const handleOnYearViewNext = () => {
+    setinitialYear(
+      parseInt(initialYear + 25)
+    );
+  }
+
+  return (
+    <View styles={styles.calendar}>
+      <YearsHeader
+        title={title}
+        styles={styles}
+        minDate={minDate}
+        maxDate={maxDate}
+        year={initialYear}
+        textStyle={textStyle}
+        nextTitle={nextTitle}
+        initialDate={initialDate}
+        headingLevel={headingLevel}
+        nextComponent={nextComponent}
+        previousTitle={previousTitle}
+        nextTitleStyle={nextTitleStyle}
+        onYearViewNext={handleOnYearViewNext}
+        previousComponent={previousComponent}
+        restrictNavigation={restrictNavigation}
+        previousTitleStyle={previousTitleStyle}
+        onYearViewPrevious={handleOnYearViewPrevious}
+      />
+      <YearsGridView
+        styles={styles}
+        minDate={minDate}
+        maxDate={maxDate}
+        textStyle={textStyle}
+        intialYear={initialYear}
+        onSelectYear={onSelectYear}
+        currentMonth={currentMonth}
+        currentYear={propCurrentYear}
+      />
+    </View>
+  );
 }
+
+export default YearSelector;

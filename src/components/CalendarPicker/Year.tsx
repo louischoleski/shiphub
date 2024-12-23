@@ -4,9 +4,20 @@ import { isAfter } from 'date-fns/isAfter';
 import { isBefore } from 'date-fns/isBefore';
 import { getMonth } from 'date-fns/getMonth';
 import { startOfMonth } from 'date-fns/startOfMonth';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
-const Year = ({
+export interface IYearProps {
+	year: number;
+	minDate?: Date;
+	maxDate?: Date;
+	currentYear: number;
+	currentMonth: number;
+	styles: StyleProp<ViewStyle>;
+	textStyle?: StyleProp<TextStyle>;
+	onSelectYear: (args: { month: number; year: number }) => void;
+}
+
+const Year: React.FC<IYearProps> = ({
 	year,
 	styles,
 	minDate,
@@ -51,7 +62,7 @@ const Year = ({
 	};
 
 	return (
-		<View style={[styles.yearContainer]}>
+		<View style={styles.yearContainer}>
 			{!yearOutOfRange ? (
 				<TouchableOpacity
 					onPress={onSelect}

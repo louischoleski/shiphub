@@ -6,16 +6,16 @@ import Month from './Month';
 export interface IMonthsGridViewProps {
 	styles?: any;
 	months?: any[];
+	minDate?: Date;
+	maxDate?: Date;
 	textStyle?: any;
-	minDate?: number; // Not sure
-	maxDate?: number; // Not sure
 	currentYear: number;
-	onSelectMonth?: () => null,
+	onSelectMonth: (params: { month: number; year: number }) => void;
 }
 
-const columnArray = [ 0, 1, 2 ];
+const columnArray = [0, 1, 2];
 
-const rowArray = [ 0, 1, 2, 3 ];
+const rowArray = [0, 1, 2, 3];
 
 const _months = Array.from(Array(12).keys());
 

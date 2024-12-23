@@ -1,12 +1,33 @@
 import React from 'react';
 import { getYear } from 'date-fns/getYear';
-import { View, Text, Platform } from 'react-native';
+import { View, Text, Platform, StyleProp, ViewStyle, TextStyle } from 'react-native';
 
 import Controls from './Controls';
 
-const accessibilityProps = { accessibilityRole: 'header' };
+export interface IYearsHeaderProps {
+  year: number;
+  title: string;
+  maxDate?: Date;
+  minDate?: Date;
+  nextTitle: string;
+  headingLevel: number;
+  previousTitle: string;
+  onYearViewNext: () => void;
+  restrictNavigation?: boolean;
+  styles: StyleProp<ViewStyle>;
+  onYearViewPrevious: () => void;
+  nextComponent?: React.ReactNode;
+  textStyle?: StyleProp<TextStyle>;
+  previousComponent?: React.ReactNode;
+  nextTitleStyle?: StyleProp<TextStyle>;
+  previousTitleStyle?: StyleProp<TextStyle>;
+}
 
-const YearsHeader = ({
+const accessibilityProps: { [key: string]: any; } = {
+	accessibilityRole: 'header'
+};
+
+const YearsHeader: React.FC<IYearsHeaderProps> = ({
 	year,
 	title,
 	styles,

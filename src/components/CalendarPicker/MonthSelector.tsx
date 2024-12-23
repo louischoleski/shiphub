@@ -1,11 +1,22 @@
-// Parent view for Month selector
-import { View } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
+import { StyleProp, TextStyle, View } from 'react-native';
 
 import MonthsHeader from './MonthsHeader';
 import MonthsGridView from './MonthsGridView';
 
-const MonthSelector = ({
+export interface IMonthSelectorProps {
+	title: string;
+	minDate?: Date;
+	maxDate?: Date;
+	months: string[];
+	currentYear: number;
+	headingLevel?: number;
+	styles: StyleProp<TextStyle>;
+	textStyle?: StyleProp<TextStyle>;
+	onSelectMonth: (params: { month: number; year: number }) => void;
+}
+
+const MonthSelector: React.FC<IMonthSelectorProps> = ({
 	title,
 	styles,
 	months,

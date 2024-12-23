@@ -1,11 +1,22 @@
 import React from 'react';
 import { getYear } from 'date-fns/getYear';
 import { getMonth } from 'date-fns/getMonth';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleProp, TextStyle } from 'react-native';
 
 import { Utils } from './Utils';
 
-const Month = ({
+export interface IMonthProps {
+	minDate?: Date;
+	maxDate?: Date;
+	months?: string[];
+	currentYear: number;
+	currentMonth: number;
+	styles: StyleProp<TextStyle>;
+	textStyle?: StyleProp<TextStyle>;
+	onSelectMonth: (params: { month: number; year: number }) => void;
+}
+
+const Month: React.FC<IMonthProps> = ({
 	styles,
 	months,
 	minDate,
@@ -32,7 +43,6 @@ const Month = ({
 		}
 
 		// ToDo: disabledMonths props to disable months separate from disabledDates
-
 		return monthIsAfterMax || monthIsBeforeMin || monthIsDisabled;
 	}, [month, minDate, maxDate]);
 

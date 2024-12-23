@@ -530,22 +530,22 @@ export default class CalendarPicker extends Component {
 				content = (
 					<YearSelector
 						styles={styles}
-						textStyle={textStyle}
-						title={selectYearTitle}
-						initialDate={new Date(initialDate)}
-						currentMonth={currentMonth}
-						currentYear={currentYear}
 						minDate={minDate}
 						maxDate={maxDate}
-						restrictNavigation={restrictMonthNavigation}
-						previousComponent={previousComponent}
+						textStyle={textStyle}
+						nextTitle={nextTitle}
+						title={selectYearTitle}
+						currentYear={currentYear}
+						currentMonth={currentMonth}
+						headingLevel={headingLevel}
 						nextComponent={nextComponent}
 						previousTitle={previousTitle}
-						nextTitle={nextTitle}
-						previousTitleStyle={previousTitleStyle}
 						nextTitleStyle={nextTitleStyle}
+						initialDate={new Date(initialDate)}
+						previousComponent={previousComponent}
+						previousTitleStyle={previousTitleStyle}
 						onSelectYear={this.handleOnSelectMonthYear}
-						headingLevel={headingLevel}
+						restrictNavigation={restrictMonthNavigation}
 					/>
 				);
 				break;
@@ -554,29 +554,29 @@ export default class CalendarPicker extends Component {
 					<View styles={styles.calendar}>
 						<HeaderControls
 							styles={styles}
-							currentMonth={currentMonth}
-							currentYear={currentYear}
-							initialDate={new Date(initialDate)}
-							onPressPrevious={this.handleOnPressPrevious}
-							onPressNext={this.handleOnPressNext}
-							onPressMonth={this.handleOnPressMonth}
-							onPressYear={this.handleOnPressYear}
 							months={months}
-							previousComponent={previousComponent}
-							nextComponent={nextComponent}
-							previousTitle={previousTitle}
-							nextTitle={nextTitle}
-							previousTitleStyle={previousTitleStyle}
-							nextTitleStyle={nextTitleStyle}
-							monthTitleStyle={monthTitleStyle}
-							yearTitleStyle={yearTitleStyle}
-							textStyle={textStyle}
-							restrictMonthNavigation={restrictMonthNavigation}
 							minDate={minDate}
 							maxDate={maxDate}
+							nextTitle={nextTitle}
+							textStyle={textStyle}
+							currentYear={currentYear}
 							headingLevel={headingLevel}
-							monthYearHeaderWrapperStyle={monthYearHeaderWrapperStyle}
+							currentMonth={currentMonth}
+							nextComponent={nextComponent}
+							previousTitle={previousTitle}
+							nextTitleStyle={nextTitleStyle}
+							yearTitleStyle={yearTitleStyle}
+							monthTitleStyle={monthTitleStyle}
+							initialDate={new Date(initialDate)}
+							onPressNext={this.handleOnPressNext}
+							onPressYear={this.handleOnPressYear}
+							previousComponent={previousComponent}
+							onPressMonth={this.handleOnPressMonth}
+							previousTitleStyle={previousTitleStyle}
 							headerWrapperStyle={headerWrapperStyle}
+							onPressPrevious={this.handleOnPressPrevious}
+							restrictMonthNavigation={restrictMonthNavigation}
+							monthYearHeaderWrapperStyle={monthYearHeaderWrapperStyle}
 						/>
 						<Weekdays
 							styles={styles}
@@ -588,25 +588,25 @@ export default class CalendarPicker extends Component {
 							dayLabelsWrapper={dayLabelsWrapper}
 							customDayHeaderStyles={customDayHeaderStyles}
 						/>
-						{scrollable ?
+						{scrollable ? (
 							<Scroller
-								ref={scroller => this.scroller = scroller}
 								data={monthsList}
-								renderMonth={this.renderMonth}
-								renderMonthParams={renderMonthParams}
-								maxSimultaneousMonths={this.numMonthsScroll}
-								initialRenderIndex={initialScrollerIndex}
 								minDate={minDate}
 								maxDate={maxDate}
-								restrictMonthNavigation={restrictMonthNavigation}
-								updateMonthYear={this.updateMonthYear}
-								onMonthChange={onMonthChange}
 								horizontal={horizontal}
+								onMonthChange={onMonthChange}
+								renderMonth={this.renderMonth}
+								renderMonthParams={renderMonthParams}
+								updateMonthYear={this.updateMonthYear}
+								initialRenderIndex={initialScrollerIndex}
+								ref={scroller => this.scroller = scroller}
+								maxSimultaneousMonths={this.numMonthsScroll}
 								scrollDecelarationRate={scrollDecelarationRate}
+								restrictMonthNavigation={restrictMonthNavigation}
 							/>
-							:
+						) : (
 							this.renderMonth(renderMonthParams)
-						}
+						)}
 					</View>
 				);
 		}

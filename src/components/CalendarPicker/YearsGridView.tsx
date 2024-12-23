@@ -1,11 +1,22 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleProp, ViewStyle, TextStyle } from 'react-native';
 
 import Year from './Year';
 
-const guideArray = [ 0, 1, 2, 3, 4 ];
+export interface IYearsGridViewProps {
+	minDate?: Date;
+	maxDate?: Date;
+	intialYear: number;
+	currentYear: number;
+	currentMonth: number;
+	styles: StyleProp<ViewStyle>;
+	textStyle?: StyleProp<TextStyle>;
+	onSelectYear: (year: number) => void;
+}
 
-const YearsGridView = ({
+const guideArray = [0, 1, 2, 3, 4];
+
+const YearsGridView: React.FC<IYearsGridViewProps> = ({
 	styles,
 	minDate,
 	maxDate,
