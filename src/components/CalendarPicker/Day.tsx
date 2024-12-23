@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ViewStyle, TextStyle } from 'react-native';
 import { isAfter, isBefore, isSameDay, startOfDay, differenceInDays, isWithinInterval } from 'date-fns';
+import useSelectedDayStyles from './useSelectedDayStyles';
 
 export interface IRangeDuration {
   date: Date;
@@ -169,59 +170,35 @@ const Day: React.FC<IDayProps> = ({
     })
   ), [thisDay, selectedStartDate, selectedEndDate]);
 
-  let computedSelectedDayStyle = styles.dayButton;
-  let overrideOutOfRangeTextStyle;
-  let selectedDayTextStyle = {};
-  let selectedDayStyle;
+  const {
+    computedSelectedDayWrapperStyle,
+    computedSelectedDayStyle,
+    selectedDayTextStyle,
+    overrideOutOfRangeTextStyle,
+    selectedDayStyle,
+  } = useSelectedDayStyles({
+    today,
+    custom,
+    styles,
+    thisDay,
+    todayTextStyle,
+    dateOutOfRange,
+    selectedEndDate,
+    selectedStartDate,
+    selectedRangeStyle,
+    allowRangeSelection,
+    propSelectedDayStyle,
+    selectedRangeEndStyle,
+    selectedRangeStartStyle,
+    propSelectedDayTextStyle,
+    selectedRangeEndTextStyle,
+    isThisDateInSelectedRange,
+    isThisDaySameAsSelectedEnd,
+    selectedRangeStartTextStyle,
+    isThisDaySameAsSelectedStart,
+  });
 
   if (!dateOutOfRange || isThisDaySameAsSelectedStart || isThisDaySameAsSelectedEnd || isThisDateInSelectedRange) {
-    const isToday = isSameDay(thisDay, today);
-
-    if (isToday) {
-      computedSelectedDayStyle = styles.selectedToday;
-      selectedDayTextStyle = [todayTextStyle];
-    }
-
-    if (isToday && custom.style) {
-      computedSelectedDayStyle = [styles.selectedToday, custom.style];
-    }
-
-    if (!allowRangeSelection && selectedStartDate && isThisDaySameAsSelectedStart) {
-      computedSelectedDayStyle = styles.selectedDay;
-      selectedDayStyle = propSelectedDayStyle || styles.selectedDayBackground;
-      selectedDayTextStyle = [styles.selectedDayLabel, isToday && todayTextStyle, propSelectedDayTextStyle];
-    }
-
-    if (allowRangeSelection) {
-      if (selectedStartDate && selectedEndDate) {
-        if (isThisDaySameAsSelectedStart) {
-          computedSelectedDayStyle = [styles.startDayWrapper, selectedRangeStyle, selectedRangeStartStyle];
-          selectedDayTextStyle = [styles.selectedDayLabel, propSelectedDayTextStyle, selectedRangeStartTextStyle];
-        }
-
-        if (isThisDaySameAsSelectedEnd) {
-          computedSelectedDayStyle = [styles.endDayWrapper, selectedRangeStyle, selectedRangeEndStyle];
-          selectedDayTextStyle = [styles.selectedDayLabel, propSelectedDayTextStyle, selectedRangeEndTextStyle];
-        }
-
-        if (isThisDaySameAsSelectedEnd && isThisDaySameAsSelectedStart && isSameDay(selectedEndDate, selectedStartDate)) {
-          computedSelectedDayStyle = [styles.selectedDay, styles.selectedDayBackground, selectedRangeStyle];
-          selectedDayTextStyle = [styles.selectedDayLabel, propSelectedDayTextStyle, selectedRangeStartTextStyle];
-        }
-
-        if (!isThisDaySameAsSelectedEnd && !isThisDaySameAsSelectedStart && isWithinInterval(thisDay, { start: selectedStartDate, end: selectedEndDate })) {
-          computedSelectedDayStyle = [styles.inRangeDay, selectedRangeStyle];
-          selectedDayTextStyle = [styles.selectedDayLabel, propSelectedDayTextStyle];
-        }
-      }
-
-      if (selectedStartDate && !selectedEndDate && isThisDaySameAsSelectedStart) {
-        overrideOutOfRangeTextStyle = selectedRangeStartTextStyle;
-        computedSelectedDayStyle = [styles.startDayWrapper, selectedRangeStyle, selectedRangeStartStyle];
-        selectedDayTextStyle = [styles.selectedDayLabel, propSelectedDayTextStyle, selectedRangeStartTextStyle];
-      }
-    }
-
     if (dateOutOfRange) {
       return (
         <View style={[styles.dayWrapper, custom.containerStyle]}>
@@ -236,7 +213,12 @@ const Day: React.FC<IDayProps> = ({
 
     return (
       <View style={[styles.dayWrapper, custom.containerStyle]}>
-        <TouchableOpacity disabled={!enableDateChange} onPress={() => onPressDay({ year, month, day })} style={[custom.style, computedSelectedDayStyle, selectedDayStyle]}>
+        <View style={computedSelectedDayWrapperStyle} />
+        <TouchableOpacity 
+          disabled={!enableDateChange} 
+          onPress={() => onPressDay({ year, month, day })} 
+          style={[custom.style, computedSelectedDayStyle, selectedDayStyle]}
+        >
           <Text style={[styles.dayLabel, textStyle, custom.textStyle, selectedDayTextStyle]}>
             {day}
           </Text>

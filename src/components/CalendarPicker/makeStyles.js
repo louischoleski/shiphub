@@ -1,6 +1,9 @@
-const DEFAULT_SELECTED_TEXT_COLOR = '#FFFFFF';
+const DEFAULT_SELECTED_TEXT_COLOR = '#212529';
+const DEFAULT_SELECTED_START_END_TEXT_COLOR = '#FFF';
+
 const DEFAULT_TODAY_BACKGROUND_COLOR = '#DFEEFF';
-const DEFAULT_SELECTED_BACKGROUND_COLOR = '#007BFF';
+const DEFAULT_SELECTED_BACKGROUND_COLOR = '#DFEEFF';
+const DEFAULT_SELECTED_START_END_BACKGROUND_COLOR = '#007BFF';
 
 const getBorderRadiusByShape = (scaler, dayShape) => {
   if (dayShape === 'square') {
@@ -50,6 +53,14 @@ export const makeStyles = ({
     selectedDayLabel: {
       color: SELECTED_TEXT_COLOR,
     },
+  
+    selectedStartDayLabel: {
+      color: DEFAULT_SELECTED_START_END_TEXT_COLOR,
+    },
+
+    selectedEndDayLabel: {
+      color: DEFAULT_SELECTED_START_END_TEXT_COLOR,
+    },
 
     dayLabelsWrapper: {
       alignSelf: 'center',
@@ -75,9 +86,9 @@ export const makeStyles = ({
     selectedDay: {
       width: 30*scaler,
       height:30*scaler,
-      borderRadius: getBorderRadiusByShape(scaler, dayShape),
       alignSelf: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      borderRadius: getBorderRadiusByShape(scaler, dayShape),
     },
 
     selectedDayBackground: {
@@ -87,46 +98,73 @@ export const makeStyles = ({
     selectedToday: {
       width: 30*scaler,
       height:30*scaler,
+      alignSelf: 'center',
+      justifyContent: 'center',
       backgroundColor: TODAY_BG_COLOR,
       borderRadius: getBorderRadiusByShape(scaler, dayShape),
-      alignSelf: 'center',
-      justifyContent: 'center'
     },
 
     dayWrapper: {
-      alignItems: 'center',
-      justifyContent: 'center',
       width: 50*scaler,
       height: 40*scaler,
+      alignItems: 'center',
+      justifyContent: 'center',
       backgroundColor: 'rgba(0,0,0,0.0)'
     },
 
-    startDayWrapper: {
-      width: 50*scaler,
+    startDayPrefixWrapper: {
+      zIndex: 1,
+      left: 25*scaler,
+      width: 30*scaler,
       height: 30*scaler,
-      borderTopLeftRadius: 20*scaler,
-      borderBottomLeftRadius: 20*scaler,
+      position: 'absolute',
       backgroundColor: SELECTED_BG_COLOR,
+    },
+
+    startEndPrefixWrapper: {
+      zIndex: 1,
+      right: 25*scaler,
+      width: 30*scaler,
+      height: 30*scaler,
+      position: 'absolute',
+      backgroundColor: SELECTED_BG_COLOR,
+    },
+
+    //
+    startDayWrapper: {
+      zIndex: 2,
+      width: 30*scaler,
+      height: 30*scaler,
       alignSelf: 'center',
-      justifyContent: 'center'
+      borderRadius: 20*scaler,
+      justifyContent: 'center',
+      // width: 50*scaler,
+      // borderTopLeftRadius: 20*scaler,
+      // borderBottomLeftRadius: 20*scaler,
+      // backgroundColor: SELECTED_BG_COLOR,
+      backgroundColor: DEFAULT_SELECTED_START_END_BACKGROUND_COLOR,
     },
 
     endDayWrapper: {
-      width: 50*scaler,
+      zIndex: 2,
+      width: 30*scaler,
       height: 30*scaler,
-      borderTopRightRadius: 20*scaler,
-      borderBottomRightRadius: 20*scaler,
-      backgroundColor: SELECTED_BG_COLOR,
       alignSelf: 'center',
-      justifyContent: 'center'
+      borderRadius: 20*scaler,
+      justifyContent: 'center',
+      // width: 50*scaler,
+      // borderTopRightRadius: 20*scaler,
+      // borderBottomRightRadius: 20*scaler,
+      // backgroundColor: SELECTED_BG_COLOR,
+      backgroundColor: DEFAULT_SELECTED_START_END_BACKGROUND_COLOR,
     },
 
     inRangeDay: {
       width: 50*scaler,
       height: 30*scaler,
-      backgroundColor: SELECTED_BG_COLOR,
       alignSelf: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      backgroundColor: SELECTED_BG_COLOR,
     },
 
     headerWrapper: {
