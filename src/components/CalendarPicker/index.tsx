@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { View, Dimensions, Text } from 'react-native';
-import { makeStyles } from './makeStyles';
-import { Utils } from './Utils';
-import HeaderControls from './HeaderControls';
-import Weekdays from './Weekdays';
-import DaysGridView from './DaysGridView';
-import MonthSelector from './MonthSelector';
-import YearSelector from './YearSelector';
-import Scroller from './Scroller';
-
-import { addMonths } from 'date-fns/addMonths';
-import { getMonth } from 'date-fns/getMonth';
 import { getYear } from 'date-fns/getYear';
 import { isAfter } from 'date-fns/isAfter';
+import { getMonth } from 'date-fns/getMonth';
 import { isBefore } from 'date-fns/isBefore';
+import { addMonths } from 'date-fns/addMonths';
 import { isSameDay } from 'date-fns/isSameDay';
+import { subMonths } from 'date-fns/subMonths';
 import { isSameMonth } from 'date-fns/isSameMonth';
 import { startOfMonth } from 'date-fns/startOfMonth';
-import { subMonths } from 'date-fns/subMonths';
+import { View, Dimensions, Text } from 'react-native';
+
+import { Utils } from './Utils';
+import Weekdays from './Weekdays';
+import Scroller from './Scroller';
+import { makeStyles } from './makeStyles';
+import DaysGridView from './DaysGridView';
+import YearSelector from './YearSelector';
+import MonthSelector from './MonthSelector';
+import FooterControls from './FooterControls';
+import HeaderControls from './HeaderControls';
 
 export default class CalendarPicker extends Component {
 	constructor(props) {
@@ -580,12 +581,12 @@ export default class CalendarPicker extends Component {
 						/>
 						<Weekdays
 							styles={styles}
-							firstDay={startFromMonday ? 1 : firstDay}
-							currentMonth={currentMonth}
-							currentYear={currentYear}
 							weekdays={weekdays}
 							textStyle={textStyle}
+							currentYear={currentYear}
+							currentMonth={currentMonth}
 							dayLabelsWrapper={dayLabelsWrapper}
+							firstDay={startFromMonday ? 1 : firstDay}
 							customDayHeaderStyles={customDayHeaderStyles}
 						/>
 						{scrollable ? (
@@ -607,6 +608,32 @@ export default class CalendarPicker extends Component {
 						) : (
 							this.renderMonth(renderMonthParams)
 						)}
+						{/* <FooterControls
+							styles={styles}
+							months={months}
+							minDate={minDate}
+							maxDate={maxDate}
+							nextTitle={nextTitle}
+							textStyle={textStyle}
+							currentYear={currentYear}
+							headingLevel={headingLevel}
+							currentMonth={currentMonth}
+							nextComponent={nextComponent}
+							previousTitle={previousTitle}
+							nextTitleStyle={nextTitleStyle}
+							yearTitleStyle={yearTitleStyle}
+							monthTitleStyle={monthTitleStyle}
+							initialDate={new Date(initialDate)}
+							onPressNext={this.handleOnPressNext}
+							onPressYear={this.handleOnPressYear}
+							previousComponent={previousComponent}
+							onPressMonth={this.handleOnPressMonth}
+							previousTitleStyle={previousTitleStyle}
+							headerWrapperStyle={headerWrapperStyle}
+							onPressPrevious={this.handleOnPressPrevious}
+							restrictMonthNavigation={restrictMonthNavigation}
+							monthYearHeaderWrapperStyle={monthYearHeaderWrapperStyle}
+						/> */}
 					</View>
 				);
 		}

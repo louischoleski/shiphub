@@ -1,5 +1,7 @@
-import { getMonth } from 'date-fns/getMonth';
+import * as React from 'react';
 import { getYear } from 'date-fns/getYear';
+import Svg, { Path } from 'react-native-svg';
+import { getMonth } from 'date-fns/getMonth';
 import { isSameDay } from 'date-fns/isSameDay';
 import { isSameMonth } from 'date-fns/isSameMonth';
 
@@ -100,3 +102,18 @@ export const Utils = {
   isSameMonthAndYear,
   getISOWeekdaysOrder,
 };
+
+export const CarretIcon = () => (
+  <Svg
+    width={8}
+    height={5}
+    fill="none"
+    viewBox="0 0 8 5"
+  >
+    <Path
+      d="M4 3.54289L1.45711 1H6.54289L4 3.54289Z"
+      fill="#212529"
+      stroke="black"
+    />
+  </Svg>
+);

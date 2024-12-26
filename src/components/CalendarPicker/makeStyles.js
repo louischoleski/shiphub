@@ -185,8 +185,8 @@ export const makeStyles = ({
 
     monthYearHeaderWrapper: {
       flexDirection: 'row',
-      justifyContent: 'center',
       alignItems: 'center',
+      justifyContent: 'center',
       paddingHorizontal: 3*scaler,
     },
 
@@ -226,18 +226,18 @@ export const makeStyles = ({
     },
 
     monthHeaderMainText: {
-      fontSize: 16*scaler,
       color: '#000',
       textAlign: 'right',
-      marginHorizontal: 3*scaler,
+      fontSize: 12*scaler,
+      marginHorizontal: 10*scaler,
     },
 
     monthButton: {
       width: 30*scaler,
       height: 30*scaler,
-      borderRadius: 30*scaler,
       alignSelf: 'center',
-      justifyContent: 'center'
+      borderRadius: 30*scaler,
+      justifyContent: 'center',
     },
 
     monthsHeaderText: {
@@ -270,9 +270,10 @@ export const makeStyles = ({
     },
 
     yearHeaderMainText: {
-      fontSize: 16*scaler,
       color: '#000',
-      marginHorizontal: 3*scaler,
+      fontSize: 12*scaler,
+      marginHorizontal: 12*scaler,
+      // backgroundColor: 'blue',
     },
 
     yearContainer: {
@@ -281,9 +282,9 @@ export const makeStyles = ({
     },
 
     yearText: {
-      fontSize: 14*scaler,
       color: '#000',
-      alignSelf: 'center'
+      alignSelf: 'center',
+      fontSize: 14*scaler,
     },
 
     yearsHeaderText: {
@@ -303,6 +304,12 @@ export const makeStyles = ({
       flexDirection: 'row',
       padding: 20*scaler,
     },
-
+    
+    carretWrapper: {
+      paddingLeft: 4,
+      paddingBottom: 2,
+      alignSelf: 'center',
+      justifyContent: 'center',
+    }
   };
 }
