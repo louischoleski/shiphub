@@ -39,19 +39,23 @@ export const makeStyles = ({
     dayButton: {
       width: 30*scaler,
       height: 30*scaler,
-      borderRadius: getBorderRadiusByShape(scaler, dayShape),
       alignSelf: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      borderRadius: getBorderRadiusByShape(scaler, dayShape),
     },
 
     dayLabel: {
-      fontSize: 14*scaler,
       color: '#000',
-      alignSelf: 'center'
+      alignSelf: 'center',
+      fontSize: 14*scaler,
     },
 
     selectedDayLabel: {
       color: SELECTED_TEXT_COLOR,
+    },
+
+    selectedDayRangeLabel: {
+      color: DEFAULT_SELECTED_START_END_TEXT_COLOR,
     },
   
     selectedStartDayLabel: {
