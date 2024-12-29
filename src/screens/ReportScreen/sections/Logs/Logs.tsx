@@ -10,8 +10,8 @@ import { DEFAULT_FILTERS, SupportedFilters } from './../../ReportScreen.controll
 import { DEFUALT_DAILY_DATE } from '../../../../components/DeliveryCard/DeliveryCard.controller';
 
 interface IReportLogSectionProps {
+    onSectionPress: (section?: string) => void;
     dateRange?: { startDate: any; endDate: any; };
-    onSectionPress: () => null;
 }
 
 const ReportLogSection: React.FC<IReportLogSectionProps> = ({
