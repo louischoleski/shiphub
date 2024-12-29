@@ -5,33 +5,46 @@ import styles from './../../ReportScreen.styled';
 import { useDateFormatter } from '../../../../utils/hooks';
 import { Grid, Input, Card, Button, CalendarPicker } from '../../../../components';
 
-const ReportCalendarSection = ({ onSectionPress }) => {
-    const dateFormatter = useDateFormatter();
+interface IReportCalendarSectionProps {
+    dateRange?: { startDate: any; endDate: any; };
+    setDateRange: (dateInfo: any) => null;
+    onSectionPress: () => null;
+}
 
-    const [data, setData] = React.useState({ startDate: '', endDate: '' });
+const ReportCalendarSection: React.FC<IReportCalendarSectionProps> = ({
+    dateRange,
+    setDateRange,
+    onSectionPress,
+}) => {
+    const dateFormatter = useDateFormatter();
 
     const minDate = new Date(); // Today
     const maxDate = new Date(2024, 12, 3);
 
+    React.useEffect(() => {
+        if (!dateRange?.startDate || !dateRange?.endDate) return;
+
+        onSectionPress('LOGS');
+    }, [dateRange]);
+
     const onChangeValue = (value: string, key?: string) => {
         if (!key || !key.length) return;
 
-        setData({ ...data, [key]: value });
+        setDateRange({ ...dateRange, [key]: value });
     }
 
     const onDateChange = (date, type) => {
         console.log(date, type)
         if (type === 'END_DATE') {
-            setData({
-                ...data,
+            setDateRange({
+                ...dateRange,
                 endDate: date,
             });
         } else {
-            setData({
-                ...data,
+            setDateRange({
+                ...dateRange,
                 startDate: date,
             });
-            onSectionPress('LOGS')
         }
     };
 
@@ -48,7 +61,7 @@ const ReportCalendarSection = ({ onSectionPress }) => {
                         label="Start Date"
                         placeholder="DD/MM/YYYY"
                         setValue={onChangeValue}
-                        value={dateFormatter(data?.startDate, 'DD/MM/YYYY')}
+                        value={dateFormatter(dateRange?.startDate, 'DD/MM/YYYY')}
                     />
                     <Input
                         disabled
@@ -57,7 +70,7 @@ const ReportCalendarSection = ({ onSectionPress }) => {
                         label="End Date"
                         placeholder="DD/MM/YYYY"
                         setValue={onChangeValue}
-                        value={dateFormatter(data?.endDate, 'DD/MM/YYYY')}
+                        value={dateFormatter(dateRange?.endDate, 'DD/MM/YYYY')}
                     />
                 </Grid>
             </Card>
