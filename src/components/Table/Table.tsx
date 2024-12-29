@@ -10,6 +10,8 @@ interface ITableProps {
     header?: Array<{ key: string, label: string }>;
 }
 
+const DEFAULT_HEADER_HEIGHT = 15;
+
 const Table: React.FC<ITableProps> = ({
     data = [],
     header = [],
@@ -19,7 +21,7 @@ const Table: React.FC<ITableProps> = ({
     if (!data || !data.length) {
         return (
             <View style={styles.tableContainer}>
-                <Text style={styles.noDataText}>
+                <Text style={[styles.noDataText, { marginVertical: (maxHeight / 2) + DEFAULT_HEADER_HEIGHT }]}>
                     {noDataMessage}
                 </Text>
             </View>

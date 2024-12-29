@@ -7,6 +7,7 @@ import { DEFAULT_REPORT_SECTIONS } from './ReportScreen.controller';
 
 const ReportScreen = () => {
     const [activeSection, setActiveSection] = React.useState('');
+    const [dateRange, setDateRange] = React.useState({ startDate: '', endDate: '' });
 
     React.useEffect(() => {
         setActiveSection(DEFAULT_REPORT_SECTIONS.MAIN);
@@ -26,6 +27,20 @@ const ReportScreen = () => {
         setActiveSection(DEFAULT_REPORT_SECTIONS.MAIN);
     }
 
+    const handleCTAPress = () => {
+
+    }
+
+    const onCTAPress = React.useMemo(() => {
+        let res = null;
+
+        if (activeSection === DEFAULT_REPORT_SECTIONS.LOGS) {
+            res = handleCTAPress;
+        }
+
+        return res;
+    }, [activeSection]);
+
     const hideHeaderNav = React.useMemo(() => !Boolean(
         activeSection === DEFAULT_REPORT_SECTIONS.MAIN
     ), [activeSection]);
@@ -33,17 +48,28 @@ const ReportScreen = () => {
     return (
         <ScreenView
             withHeader
+            ctaIcon="csv"
             withNav={hideHeaderNav}
+            onCTAPress={onCTAPress}
             onBackPress={onBackPress}
         >
             {activeSection === DEFAULT_REPORT_SECTIONS.MAIN && (
-                <Main onSectionPress={onSectionPress} />
-            )}
-            {activeSection === DEFAULT_REPORT_SECTIONS.DATE && (
-                <Calendar onSectionPress={onSectionPress} />
+                <Main 
+                    onSectionPress={onSectionPress}
+                />
             )}
             {activeSection === DEFAULT_REPORT_SECTIONS.LOGS && (
-                <Logs onSectionPress={onSectionPress} />
+                <Logs 
+                    dateRange={dateRange}
+                    onSectionPress={onSectionPress}
+                />
+            )}
+            {activeSection === DEFAULT_REPORT_SECTIONS.DATE && (
+                <Calendar 
+                    dateRange={dateRange}
+                    setDateRange={setDateRange}
+                    onSectionPress={onSectionPress}
+                />
             )}
         </ScreenView>
     )

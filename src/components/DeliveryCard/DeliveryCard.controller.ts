@@ -86,6 +86,8 @@ export const DEFUALT_WEEK_DATE = 'dddd, MMMM D';
 
 export const DEFAULT_DATE_FORMAT = 'DD/MM/YYYY';
 
+export const DEFUALT_DAILY_DATE = 'MMMM D, YYYY';
+
 export const DEFAULT_TIME_DATE_FORMAT = 'DD/MM/YYYY HH:mm A';
 
 export const SUPPORTED_CTA_STATUSES = [StatusTypes.PENDING, StatusTypes.IN_TRANSIT];

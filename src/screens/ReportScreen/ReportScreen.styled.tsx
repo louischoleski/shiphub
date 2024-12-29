@@ -1,6 +1,8 @@
 import tw from 'twrnc';
 import { StyleSheet } from 'react-native';
 
+const DEFAULT_SPACING = 12;
+
 const styles = StyleSheet.create({
     headingContainer: {
         flexDirection: 'row',
@@ -46,6 +48,17 @@ const styles = StyleSheet.create({
     filters: {
         marginTop: 15,
         marginBottom: 8,
+    },
+    //
+    logout: {
+        flexGrow: 1,
+        marginBottom: 104,
+        justifyContent: 'flex-end',
+        marginLeft: DEFAULT_SPACING,
+        marginRight: DEFAULT_SPACING,
+    },
+    marginTop: {
+        marginTop: 20,
     }
 });
 

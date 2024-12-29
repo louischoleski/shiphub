@@ -14,7 +14,7 @@ export interface IInputProps {
     disabled?: boolean;
     placeholder?: string;
     type: EInputTypes | string;
-    setValue: (text: string, key?: string) => void;
+    setValue?: (text: string, key?: string) => void;
 }
 
 export const DEFAULT_INPUT_ICONS = {

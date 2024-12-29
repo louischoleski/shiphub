@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         // borderRightColor: '#c4c4c4',
     },
     row: {
-        paddingVertical: 8,
+        paddingVertical: 9,
         borderColor: '#DDD',
         flexDirection: 'row',
         paddingHorizontal: 4,
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     noDataText: {
         fontSize: 14,
         color: '#999',
-        marginVertical: 165,
         textAlign: 'center',
     },
     scrollableContent: {
