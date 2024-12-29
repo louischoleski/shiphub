@@ -5,20 +5,24 @@ import styles from './ScreenView.styled';
 import Illustration from '../Illustration';
 
 export interface IScreenViewProps {
+    ctaIcon?: string;
     withNav?: boolean;
     withHeader?: boolean;
     withWhiteBg?: boolean;
     onBackPress?: () => void;
     withoutSafeView?: boolean;
     children: React.ReactNode;
+    onCTAPress?: () => void | null;
 }
 
 const ScreenView: React.FC<IScreenViewProps> = ({
-    onBackPress = () => null,
     withoutSafeView = false,
     withWhiteBg = false,
     withHeader = false,
+    onBackPress = null,
+    onCTAPress = null,
     withNav = false,
+    ctaIcon = 'target',
     children
 }) => {
     const ViewWrapper = withoutSafeView ? View : SafeAreaView;
@@ -27,7 +31,7 @@ const ScreenView: React.FC<IScreenViewProps> = ({
         <ViewWrapper style={[styles.container, withWhiteBg ? styles.withWhiteBg : null]}>
             {withHeader && (
                 <View style={styles.headerContainer}>
-                    {withNav ? (
+                    {withNav && onBackPress ? (
                         <TouchableOpacity 
                             onPress={onBackPress} 
                             style={styles.backButton}
@@ -44,7 +48,18 @@ const ScreenView: React.FC<IScreenViewProps> = ({
                         name="brand"
                     />
 
-                    <View style={styles.placeholder} />
+                    {withNav && onCTAPress ? (
+                        <TouchableOpacity 
+                            onPress={onCTAPress} 
+                            style={styles.placeholder}
+                        >
+                            <Illustration.Icon
+                                name={ctaIcon}
+                            />
+                        </TouchableOpacity>
+                    ) : (
+                        <View style={styles.placeholder} />
+                    )}
                 </View>
             )}
             {children}
