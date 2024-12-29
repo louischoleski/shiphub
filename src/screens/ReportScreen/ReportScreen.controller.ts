@@ -26,7 +26,7 @@ export const DEFAULT_FILTERS = (
 export const DEFAULT_REPORT_SECTIONS = {
     MAIN: 'MAIN',
     DATE: 'DATE',
-    REPORT: 'REPORT',
+    LOGS: 'LOGS',
 }
 
 export const DELIVERY_STATUS_ICONS = {

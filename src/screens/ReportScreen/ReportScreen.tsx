@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ScreenView } from '../../components';
 import { withPrivateNav } from '../../utils/hocs';
-import { Main, Calendar, Log } from './sections';
+import { Main, Calendar, Logs } from './sections';
 import { DEFAULT_REPORT_SECTIONS } from './ReportScreen.controller';
 
 const ReportScreen = () => {
@@ -42,8 +42,8 @@ const ReportScreen = () => {
             {activeSection === DEFAULT_REPORT_SECTIONS.DATE && (
                 <Calendar onSectionPress={onSectionPress} />
             )}
-            {activeSection === DEFAULT_REPORT_SECTIONS.REPORT && (
-                <Log onSectionPress={onSectionPress} />
+            {activeSection === DEFAULT_REPORT_SECTIONS.LOGS && (
+                <Logs onSectionPress={onSectionPress} />
             )}
         </ScreenView>
     )
