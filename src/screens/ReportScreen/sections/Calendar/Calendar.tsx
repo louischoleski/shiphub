@@ -1,12 +1,18 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 import styles from './../../ReportScreen.styled';
-import { Grid, Input, Card } from '../../../../components';
+import { useDateFormatter } from '../../../../utils/hooks';
 import { DEFAULT_REPORT_SECTIONS } from './../../ReportScreen.controller';
+import { Grid, Input, Card, CalendarPicker } from '../../../../components';
 
 const ReportCalendarSection = ({ onSectionPress }) => {
-    const [data, setData] = React.useState({ startDate: 0, endDate: 0 });
+    const dateFormatter = useDateFormatter();
+
+    const [data, setData] = React.useState({ startDate: '', endDate: '' });
+
+    const minDate = new Date(); // Today
+    const maxDate = new Date(2024, 12, 3);
 
     const onChangeValue = (value: string, key?: string) => {
         if (!key || !key.length) return;
@@ -14,36 +20,77 @@ const ReportCalendarSection = ({ onSectionPress }) => {
         setData({ ...data, [key]: value });
     }
 
-    const onSelectDatePressed = () => {
-        onSectionPress(DEFAULT_REPORT_SECTIONS.DATE);
-    }
+    const onDateChange = (date, type) => {
+        if (type === 'END_DATE') {
+            setData({
+                ...data,
+                endDate: date,
+            });
+        } else {
+            setData({
+                ...data,
+                startDate: date,
+            });
+        }
+    };
 
     return (
         <>
             <Card title="Enter date range">
                 <Grid cols={2}>
                     <Input
+                        disabled
                         type="DATE"
                         name="startDate"
                         label="Start Date"
-                        value={data.startDate}
                         placeholder="DD/MM/YYYY"
                         setValue={onChangeValue}
+                        value={dateFormatter(data?.startDate, 'DD/MM/YYYY')}
                     />
                     <Input
+                        disabled
                         type="DATE"
                         name="endDate"
                         label="End Date"
-                        value={data.endDate}
                         placeholder="DD/MM/YYYY"
                         setValue={onChangeValue}
+                        value={dateFormatter(data?.endDate, 'DD/MM/YYYY')}
                     />
                 </Grid>
             </Card>
             <Card>
-                <Text>
-                    Todo Calendar
-                </Text>
+                <CalendarPicker
+                    startFromMonday={true}
+                    allowRangeSelection={true}
+                    minDate={minDate}
+                    maxDate={maxDate}
+                    weekdays={["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"]}
+                    months={[
+                        "Janeiro",
+                        "Fevereiro",
+                        "Março",
+                        "Abril",
+                        "Maio",
+                        "Junho",
+                        "Julho",
+                        "Agosto",
+                        "Setembro",
+                        "Outubro",
+                        "Novembro",
+                        "Dezembro",
+                    ]}
+                    previousTitle="Anterior"
+                    nextTitle="Próximo"
+                    todayBackgroundColor="#e6ffe6"
+                    selectedDayColor="#66ff33"
+                    selectedDayTextColor="#000000"
+                    scaleFactor={375}
+                    textStyle={{
+                        fontFamily: "Cochin",
+                        color: "#000000",
+                    }}
+                    onDateChange={onDateChange}
+                />
             </Card>
         </>
     )

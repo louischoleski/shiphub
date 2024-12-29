@@ -15,4 +15,5 @@ export { default as Illustration } from './Illustration';
 export { default as NavFavorites } from './NavFavorites';
 export { default as NavigateCard } from './NavigateCard';
 export { default as NavigationBar } from './NavigationBar';
+export { default as CalendarPicker } from './CalendarPicker';
 export { default as RideOptionsCard } from './RideOptionsCard';

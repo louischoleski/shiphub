@@ -3,38 +3,14 @@ import { View, Text, TextInput } from 'react-native';
 
 import styles from './Input.styled';
 import Illustration from '../Illustration';
-
-export enum EInputTypes {
-    TEXT = 'TEXT',
-    DATE = 'DATE',
-    EMAIL = 'EMAIL',
-    PHONE = 'PHONE',
-    SEARCH = 'SEARCH',
-    PASSWORD = 'PASSWORD',
-}
-
-export interface IInputProps {
-    name: string;
-    value: string;
-    label?: string;
-    placeholder?: string;
-    type: EInputTypes | string;
-    setValue: (text: string, key?: string) => void;
-}
-
-export const DEFAULT_INPUT_ICONS = {
-    [EInputTypes.EMAIL]: 'mail',
-    [EInputTypes.PHONE]: 'call',
-    [EInputTypes.DATE]: 'calendar',
-    [EInputTypes.SEARCH]: 'search',
-    [EInputTypes.PASSWORD]: 'lock',
-};
+import { EInputTypes, IInputProps, DEFAULT_INPUT_ICONS } from './Input.controller';
 
 const Input: React.FC<IInputProps> = ({
     name,
     value, 
     label, 
     setValue, 
+    disabled,
     placeholder,
     type = EInputTypes.TEXT, 
 }) => {
@@ -42,7 +18,11 @@ const Input: React.FC<IInputProps> = ({
         label && label.length
     ), [label]);
 
-    const onChangeText = (keyValue: string) => setValue(keyValue, name);
+    const onChangeText = (keyValue: string) => {
+        if (!disabled) {
+            setValue(keyValue, name);
+        }
+    };
 
     const [ hasIcon, secureTextEntry ] = React.useMemo(() => {
         let [ showIcon, showSecureTextEntry ] = [ false, false ];
@@ -75,20 +55,29 @@ const Input: React.FC<IInputProps> = ({
                     {label}
                </Text> 
             )}
-            <View style={styles.container}>
+            <View style={[
+                styles.container,
+                disabled ? styles.disabledContainer : null
+            ]}>
                 {hasIcon && (
                     <View style={styles.icon}>
                         <Illustration.Icon
                             name={DEFAULT_INPUT_ICONS[type]}
+                            color={disabled ? '#a9a9a9' : null}
                         />
                     </View>
                 )}
                 <TextInput 
                     value={value}
+                    editable={!disabled}
                     placeholder={placeholder} 
                     onChangeText={onChangeText}
                     secureTextEntry={secureTextEntry}
-                    style={[ styles.input, hasIcon ? styles.inputIcon : null]} 
+                    style={[
+                        styles.input, 
+                        hasIcon ? styles.inputIcon : null,
+                        disabled ? styles.disabledInput : null,
+                    ]} 
                 />
             </View>
         </View>
