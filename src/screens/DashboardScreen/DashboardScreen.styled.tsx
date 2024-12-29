@@ -1,54 +1,90 @@
-import tw from 'twrnc';
+        import tw from 'twrnc';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    container: tw`bg-white h-full`,
-    containerView: tw`p-5`,
-    brandImg: {
-        width: 100,
-        height: 100,
-        resizeMode: "contain",
+    headingContainer: {
+        paddingLeft: 16,
+        paddingRight: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
-    mapContainter: {
-        container: {
-            zIndex: 1,
-            width: '100%',
-            marginBottom: 40
-        },
-        textInputContainer: {
-            flexDirection: 'row',
-        },
-        textInput: {
-            backgroundColor: '#FFFFFF',
-            height: 44,
-            borderRadius: 5,
-            paddingVertical: 5,
-            paddingHorizontal: 10,
-            fontSize: 15,
-            flex: 1,
-        },
-        listView: {
-            position: 'absolute',
-            backgroundColor: '#FFF',
-            zIndex: 10,
-        },
-        row: {
-            backgroundColor: '#FFFFFF',
-            padding: 13,
-            height: 44,
-            flexDirection: 'row',
-        },
-        separator: {
-            height: 0.5,
-            backgroundColor: '#c8c7cc',
-        },
-        description: {},
-        loader: {
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            height: 20,
-        },
-    }
-})
+    icon: {
+        height: 40,
+        ...tw`mr-4 p-2`,
+        borderRadius: 6,
+        backgroundColor: '#F2F2F2',
+    },
+    iconWrapper: {
+        margin: 12,
+        padding: 12,
+        borderWidth: 1,
+        borderRadius: 6,
+        borderColor: '#E1E1E1',
+        backgroundColor: 'white',
+    },
+    statusWrapper: {
+        paddingBottom: 15,
+        borderBottomWidth: 1,
+        borderColor: '#E1E1E1',
+        ...tw`flex-row items-evenly`
+    },
+    info: {
+        flex: 1,
+    },
+    // Location row.
+    locationWrapper: {
+        marginVertical: 25,
+        flexDirection: 'row',
+    },
+    locationFrom: {
+        flex: 1,
+        color: '#212529',
+        textAlign: 'left',
+        verticalAlign: 'middle',
+    },
+    locationIcon: {
+    },
+    locationTo: {
+        flex: 1,
+        color: '#212529',
+        textAlign: 'right',
+        verticalAlign: 'middle',
+    },
+    // Receiver row.
+    receiverName: {
+        flex: 1,
+        verticalAlign: 'middle',
+        alignItems: 'flex-start',
+    },
+    receiverNumber: {
+        flex: 1,
+        alignItems: 'flex-end',
+        verticalAlign: 'middle',
+    },
+    // Receiver fee.
+    boldDarkText: {
+        color: 'black',
+        marginVertical: 25,
+        fontWeight: 'bold',
+    },
+    feeTitle: {
+        textAlign: 'left',
+    },
+    feeAmount: {
+        textAlign: 'right',
+    },
+    receiverText: {
+        marginTop: 8,
+    },
+    description: {
+        color: '#6C757D',
+        fontWeight: 'bold',
+    },
+    timestamp: {
+        fontSize: 12,
+        paddingTop: 5,
+        ...tw`font-semibold`
+    },
+});
 
 export default styles;
