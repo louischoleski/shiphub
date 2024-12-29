@@ -1,10 +1,11 @@
+// TODO
 import React from 'react';
 import { View, Text, Platform, TouchableOpacity, StyleProp, ViewStyle, TextStyle } from 'react-native';
 
 // import Controls from './Controls';
 import { CarretIcon, Utils } from './Utils';
 
-export interface IHeaderControlsProps {
+export interface IFooterControlsProps {
 	maxDate?: Date;
 	minDate?: Date;
 	months?: string[];
@@ -34,7 +35,7 @@ const accessibilityProps: { [key: string]: any; } = {
 	accessibilityRole: 'header'
 };
 
-const HeaderControls: React.FC<IHeaderControlsProps> = ({
+const FooterControls: React.FC<IFooterControlsProps> = ({
 	styles,
 	months,
 	// maxDate,
@@ -76,57 +77,23 @@ const HeaderControls: React.FC<IHeaderControlsProps> = ({
 
 	return (
 		<View style={[styles.headerWrapper, headerWrapperStyle]}>
-			{/* <Controls
-				label={previousTitle}
-				component={previousComponent}
-				disabled={disablePreviousMonth}
-				onPressControl={onPressPrevious}
-				styles={styles.previousContainer}
-				textStyles={[styles.navButtonText, textStyle, previousTitleStyle]}
-			/> */}
 			<View styles={styles.previousContainer}>
 				<TouchableOpacity onPress={onPressMonth}>
 					<Text style={[styles.monthHeaderMainText, textStyle, monthTitleStyle]} {...accessibilityProps}>
-						{monthName}
-						<View style={styles.carretWrapper}>
-							<CarretIcon />
-						</View>
+						Clear
 					</Text>
 				</TouchableOpacity>
 			</View>
 			<View style={[styles.monthYearHeaderWrapper, monthYearHeaderWrapperStyle]} />
-			{/* <View style={[styles.monthYearHeaderWrapper, monthYearHeaderWrapperStyle]}>
-				<TouchableOpacity onPress={onPressMonth}>
-					<Text style={[styles.monthHeaderMainText, textStyle, monthTitleStyle]} {...accessibilityProps}>
-						{monthName}
-					</Text>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={onPressYear}>
-					<Text style={[styles.yearHeaderMainText, textStyle, yearTitleStyle]}>
-						{currentYear}
-					</Text>
-				</TouchableOpacity>
-			</View> */}
 			<View styles={styles.nextContainer}>
 				<TouchableOpacity onPress={onPressYear}>
 					<Text style={[styles.yearHeaderMainText, textStyle, yearTitleStyle]}>
-						{currentYear}
-						<View style={styles.carretWrapper}>
-							<CarretIcon />
-						</View>
+						Ok
 					</Text>
 				</TouchableOpacity>
 			</View>
-			{/* <Controls
-				label={nextTitle}
-				component={nextComponent}
-				disabled={disableNextMonth}
-				onPressControl={onPressNext}
-				styles={styles.nextContainer}
-				textStyles={[styles.navButtonText, textStyle, nextTitleStyle]}
-			/> */}
 		</View>
 	);
 }
 
-export default HeaderControls;
+export default FooterControls;
