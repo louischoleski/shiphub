@@ -26,6 +26,20 @@ const ReportScreen = () => {
         setActiveSection(DEFAULT_REPORT_SECTIONS.MAIN);
     }
 
+    const handleCTAPress = () => {
+
+    }
+
+    const onCTAPress = React.useMemo(() => {
+        let res = null;
+
+        if (activeSection === DEFAULT_REPORT_SECTIONS.LOGS) {
+            res = handleCTAPress;
+        }
+
+        return res;
+    }, [activeSection]);
+
     const hideHeaderNav = React.useMemo(() => !Boolean(
         activeSection === DEFAULT_REPORT_SECTIONS.MAIN
     ), [activeSection]);
@@ -33,7 +47,9 @@ const ReportScreen = () => {
     return (
         <ScreenView
             withHeader
+            ctaIcon="csv"
             withNav={hideHeaderNav}
+            onCTAPress={onCTAPress}
             onBackPress={onBackPress}
         >
             {activeSection === DEFAULT_REPORT_SECTIONS.MAIN && (

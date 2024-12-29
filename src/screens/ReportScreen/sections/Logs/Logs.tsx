@@ -1,11 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { sortByKey } from '../../../../utils';
 import styles from './../../ReportScreen.styled';
-import { useDateFormatter } from '../../../../utils/hooks';
+import { useDateFormatter, useScreenSize } from '../../../../utils/hooks';
 import { Grid, Input, Card, Button, Table, NavPill } from '../../../../components';
 import { DEFAULT_FILTERS, SupportedFilters } from './../../ReportScreen.controller';
+import { DEFUALT_WEEK_DATE } from '../../../../components/DeliveryCard/DeliveryCard.controller';
 
 const DEFAULT_HEADER = [
     { key: 'name', label: 'Shipping No.' },
@@ -340,6 +341,7 @@ const DUMMY_DATA = [
 ];
 
 const ReportLogSection = ({ onSectionPress }) => {
+    const screenSize = useScreenSize();
     const dateFormatter = useDateFormatter();
 
     const [options, setOptions] = React.useState([]);
@@ -391,7 +393,7 @@ const ReportLogSection = ({ onSectionPress }) => {
         name: data?.name,
         status: data?.status,
         receiverName: data?.receiverName,
-        timestamp:  dateFormatter(data?.timestamp, 'DD/MM/YYYY'),
+        timestamp: dateFormatter(data?.timestamp, 'DD/MM/YYYY'),
     }));
 
     return (
@@ -419,48 +421,39 @@ const ReportLogSection = ({ onSectionPress }) => {
                 </Grid>
             </Card>
             <View style={styles.searchFilters}>
-                {/* <Grid cols={1}>
-                    <Input
-                        name="query"
-                        type="SEARCH"
-                        value={data.query}
-                        setValue={onChangeValue}
-                        placeholder="Search shipment number"
-                    />
-                </Grid> */}
-                {/* <Grid cols={1}>
-                    <View style={styles.info}>
-                        <View style={styles.infoLeft}>
-                            <Text>
-                                Recent Deliveries
-                            </Text>
-                        </View>
-                        <View style={styles.infoRight}>
-                            <Button
-                                size="sm"
-                                type="SECONDARY"
-                                text={dateSelection}
-                                onPress={onSelectDatePressed}
-                            />
-                        </View>
-                    </View>
-                </Grid> */}
                 <Grid cols={1}>
-                    <View style={styles.filters}>
+                    <View style={styles.marginTop}>
                         <NavPill
                             options={DEFAULT_FILTERS}
                             currentItem={activeFilter}
                             onChange={setActiveFilter}
                         />
                     </View>
+                    <View style={styles.info}>
+                        <View style={[styles.infoLeft, styles.marginTop]}>
+                            <Text>
+                                Reports from July 6, 2024 - December 14, 2024
+                            </Text>
+                        </View>
+                    </View>
                 </Grid>
             </View>
 
-            <Table
-                maxHeight={300}
-                header={DEFAULT_HEADER}
-                data={parseOptions(filteredOptions)}
-            />
+            <View style={styles.marginTop}>
+                <Table
+                    maxHeight={screenSize.height / 3}
+                    header={DEFAULT_HEADER}
+                    data={parseOptions(filteredOptions)}
+                />
+            </View>
+
+            <View style={styles.logout}>
+                <Button
+                    type="PRIMARY"
+                    text="EXPORT REPORT"
+                    // onPress={onLogOutPressed}
+                />
+            </View>
         </>
     )
 }
