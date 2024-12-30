@@ -3,6 +3,7 @@ export { default as Tab } from './Tab';
 export { default as Card } from './Card';
 export { default as Grid } from './Grid';
 export { default as Link } from './Link';
+export { default as Badge } from './Badge';
 export { default as Table } from './Table';
 export { default as Input } from './Input';
 export { default as Status } from './Status';
