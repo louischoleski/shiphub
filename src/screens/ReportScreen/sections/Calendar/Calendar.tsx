@@ -6,9 +6,9 @@ import { useDateFormatter } from '../../../../utils/hooks';
 import { Grid, Input, Card, Button, CalendarPicker } from '../../../../components';
 
 interface IReportCalendarSectionProps {
-    dateRange?: { startDate: any; endDate: any; };
     setDateRange: (dateInfo: any) => null;
-    onSectionPress: () => null;
+    onSectionPress: (section?: string) => void;
+    dateRange?: { startDate: any; endDate: any; };
 }
 
 const ReportCalendarSection: React.FC<IReportCalendarSectionProps> = ({
@@ -20,6 +20,13 @@ const ReportCalendarSection: React.FC<IReportCalendarSectionProps> = ({
 
     const minDate = new Date(); // Today
     const maxDate = new Date(2024, 12, 3);
+
+    React.useEffect(() => {
+        setDateRange({
+            startDate: '',
+            endDate: '',
+        });
+    }, []);
 
     React.useEffect(() => {
         if (!dateRange?.startDate || !dateRange?.endDate) return;

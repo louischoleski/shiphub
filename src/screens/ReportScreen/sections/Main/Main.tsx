@@ -267,7 +267,7 @@ const ReportMainSection = ({ onSectionPress }) => {
                     <DeliveryCard
                         key={item.id}
                         data={item}
-                    // isExpanded
+                        // isExpanded
                     />
                 )}
             />

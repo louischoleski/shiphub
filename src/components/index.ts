@@ -1,4 +1,5 @@
 export { default as Map } from './Map';
+export { default as Tab } from './Tab';
 export { default as Card } from './Card';
 export { default as Grid } from './Grid';
 export { default as Link } from './Link';
