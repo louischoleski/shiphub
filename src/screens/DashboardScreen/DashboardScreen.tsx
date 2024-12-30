@@ -13,7 +13,7 @@ const DEFAULT_TABS = [
 ];
 
 const DashboardScreen = () => {
-    const [activeSection, setActiveSection ] = React.useState('IN_TRANSIT');
+    const [activeTab, setActiveTab ] = React.useState('IN_TRANSIT');
 
     const data = React.useMemo(() => (
         sortByKey(demoData, 'timestamp', 'desc')
@@ -47,6 +47,8 @@ const DashboardScreen = () => {
             <View style={styles.tabWrapper}>
                 <Tab 
                     options={DEFAULT_TABS}
+                    defaultTab="IN_TRANSIT"
+                    onTabSelect={setActiveTab}
                 />
             </View>
 
