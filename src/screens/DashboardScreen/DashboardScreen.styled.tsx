@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     },
     //
     tabWrapper: {
-        marginBottom: 8,
+        marginBottom: 15,
     } 
 });
 

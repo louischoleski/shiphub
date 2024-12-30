@@ -5,11 +5,29 @@ import { sortByKey } from '../../utils';
 import styles from './DashboardScreen.styled';
 import { withPrivateNav } from '../../utils/hocs';
 import { demoData } from './DashboardScreen.controller';
-import { ScreenView, DeliveryCard, Tab, Illustration } from '../../components';
+import { ScreenView, DeliveryCard, Tab, Illustration, Badge } from '../../components';
 
 const DEFAULT_TABS = [
-    { key: 'IN_TRANSIT', component: <Text>In-Transit</Text> },
-    { key: 'INCOMING', component: <Text>Incoming</Text> },
+    {
+        key: 'IN_TRANSIT',
+        component: (
+            <Text>In-Transit</Text>
+        )
+    },
+    {
+        key: 'INCOMING',
+        component: (
+            <Text>
+                Incoming
+                <Badge 
+                    round 
+                    type="DANGER"
+                >
+                    3
+                </Badge>
+            </Text>
+        )
+    },
 ];
 
 const DashboardScreen = () => {
