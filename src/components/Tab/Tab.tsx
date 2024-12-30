@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { View, Text, TouchableOpacity, Animated, Dimensions } from 'react-native';
 
@@ -5,6 +6,7 @@ import styles from './Tab.styled';
 import { ITabComponentProps } from './Tab.controller';
 
 const TabComponent: React.FC<ITabComponentProps> = ({
+  defaultTab,
   onTabSelect,
   options = [],
 }) => {
@@ -16,7 +18,16 @@ const TabComponent: React.FC<ITabComponentProps> = ({
   React.useEffect(() => {
     const { width: dimensionWidth } = Dimensions.get('window');
     setWidth(dimensionWidth);
-  }, []);
+
+    // Trigger animation for defaultTab
+    const defaultIndex = options.findIndex(({ key }) => key === defaultTab);
+    if (defaultIndex >= 0) {
+      Animated.spring(translateX, {
+        toValue: defaultIndex * (dimensionWidth / options.length),
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [defaultTab, options]);
 
   const TAB_WIDTH = React.useMemo(() => (
     width / options?.length
