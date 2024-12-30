@@ -85,6 +85,28 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         ...tw`font-semibold`
     },
+    //
+    currentLocationIconWrapper: tw`flex-row items-center p-5`,
+    currentLocationInfo: {
+        flex: 1,
+    },
+    currentLocationDescription: {
+        fontSize: 12,
+    },
+    currentLocationTimestamp: {
+        fontSize: 12,
+        paddingTop: 5,
+        color: '#6C757D',
+        fontWeight: 'bold',
+    },
+    currentLocationIcon: {
+        backgroundColor: '#DFEEFF',
+        ...tw`mr-4 rounded-full p-3`
+    },
+    //
+    tabWrapper: {
+        marginBottom: 15,
+    } 
 });
 
 export default styles;
