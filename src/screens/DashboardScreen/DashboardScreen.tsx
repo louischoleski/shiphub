@@ -15,13 +15,16 @@ const DEFAULT_TABS = [
 const DashboardScreen = () => {
     const [activeTab, setActiveTab ] = React.useState('IN_TRANSIT');
 
-    const data = React.useMemo(() => (
-        sortByKey(demoData, 'timestamp', 'desc')
-    ), [demoData]);
-
+    // TODO: Add status filter.
     const options = React.useMemo(() => {
+        let res = [];
+        
+        if (activeTab === 'IN_TRANSIT') {
+            res = sortByKey(demoData, 'timestamp', 'desc');
+        }
 
-    }, []);
+        return res;
+    }, [demoData, activeTab]);
 
     return (
         <ScreenView withHeader>
@@ -53,7 +56,7 @@ const DashboardScreen = () => {
             </View>
 
             <FlatList
-                data={data}
+                data={options}
                 keyExtractor={({ id }) => id}
                 renderItem={({ item }) => (
                     <DeliveryCard
